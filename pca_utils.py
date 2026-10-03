@@ -24,12 +24,16 @@ def listar_datasets() -> list[str]:
 
 
 def _ruta_dataset(nombre: str) -> Path:
-    ruta = DATASETS_DIR / f"{nombre}.csv"
-    if not ruta.exists():
+    # Lista de permitidos, no solo "¿existe el archivo?": con la versión
+    # anterior, nombre="../../otra_carpeta/archivo" leía cualquier CSV del
+    # disco al que llegara el proceso. Ahora solo se aceptan los nombres que
+    # devuelve listar_datasets(), es decir, archivos .csv dentro de datasets/.
+    disponibles = listar_datasets()
+    if nombre not in disponibles:
         raise ValueError(
-            f"No existe el dataset '{nombre}'. Disponibles: {listar_datasets()}"
+            f"No existe el dataset '{nombre}'. Disponibles: {disponibles}"
         )
-    return ruta
+    return DATASETS_DIR / f"{nombre}.csv"
 
 
 def describir_dataset(nombre: str) -> dict:
