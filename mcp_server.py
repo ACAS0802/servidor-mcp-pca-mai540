@@ -99,6 +99,14 @@ def ejecutar_pca(
 #   Función:     listar_datasets() -> list[str]
 #   Cuerpo:      return pca_utils.listar_datasets()
 
+@mcp.resource(
+    "data://datasets",
+    mime_type="application/json",
+    description="Lista de los datasets disponibles en la carpeta datasets/ (nombres sin .csv).",
+)
+def listar_datasets() -> list[str]:
+    return pca_utils.listar_datasets()
+
 
 # TODO 4 — resource con plantilla "data://datasets/{nombre}"
 #   Decorador:   @mcp.resource("data://datasets/{nombre}", mime_type="application/json")
