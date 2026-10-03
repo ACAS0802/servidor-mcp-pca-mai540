@@ -1,4 +1,34 @@
-# Demo Clase 5.1 — Servidor MCP para PCA
+# Servidor MCP para PCA — Tarea 5.1 (MAI 540)
+
+**Araceli Castillo** · MAI 540: Machine Learning · Prof. Kevin A. García Gallardo · Atlantis University · Octubre de 2026
+
+`mcp_server.py` completo: 2 tools (`cargar_dataset`, `ejecutar_pca`), 2 resources
+(`data://datasets`, `data://datasets/{nombre}`) y 1 prompt (`interpretar_componentes`),
+verificados uno por uno en el MCP Inspector.
+
+| Dónde | Qué |
+|---|---|
+| `mcp_server.py` | Las 5 piezas (un commit por pieza) |
+| `evidencia/` | Captura de cada pieza en el Inspector, antes/después de las correcciones y log por protocolo |
+| `PERMISOS.md` | Qué puede hacer el servidor, qué no expone y por qué es el mínimo |
+| `MAI540_Tarea5.1_Informe_Araceli_Castillo.pdf` | Informe APA de 1 página |
+
+**Probar:** `pip install -r requirements.txt` y luego `mcp dev mcp_server.py`.
+
+**Dos correcciones que salieron de la verificación** (cada una en su commit):
+1. Las tools aceptaban `nombre="../../…"` y leían cualquier CSV del disco. Ahora solo
+   aceptan los nombres de `datasets/` (`pca_utils._ruta_dataset`).
+2. Un error en una tool llegaba al cliente como *Error executing tool* sin motivo. Ahora
+   llega el mensaje (datasets disponibles o rango válido de `n_componentes`).
+
+**Historial:** `git log --oneline` — proyecto base → TODO 1 → TODO 2 → TODO 3 → TODO 4 →
+TODO 5 → corrección de rutas → corrección de errores → evidencia → permisos e informe.
+
+---
+
+*Lo que sigue es el README original del proyecto base del profesor.*
+
+## Demo Clase 5.1 — Servidor MCP para PCA
 
 Adaptado del curso de Anthropic *Introduction to Model Context Protocol* (M01–M03):
 mismo patrón (servidor con tools, resources y un prompt; cliente que se conecta a
