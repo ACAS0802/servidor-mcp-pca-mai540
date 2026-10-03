@@ -1,0 +1,108 @@
+# Log de verificacion por protocolo MCP (cliente stdio -> mcp_server.py)
+# 2026-10-03T16:23Z · mcp 2.3.0 · Python 3.11.15
+# Comando: python3 evidencia/probar_cliente.py <pruebas>
+
+===== list
+tools: ['cargar_dataset', 'ejecutar_pca']
+resources: ['data://datasets']
+templates: ['data://datasets/{nombre}']
+prompts: ['interpretar_componentes']
+===== tool:cargar_dataset:{"nombre":"iris"}
+isError: False
+{
+  "nombre": "iris",
+  "filas": 150,
+  "columnas_numericas": [
+    "sepal length (cm)",
+    "sepal width (cm)",
+    "petal length (cm)",
+    "petal width (cm)"
+  ],
+  "columnas_categoricas": [
+    "species"
+  ]
+}
+===== tool:ejecutar_pca:{"nombre":"iris","n_componentes":2}
+isError: False
+{
+  "dataset": "iris",
+  "filas_usadas": 150,
+  "variables_originales": [
+    "sepal length (cm)",
+    "sepal width (cm)",
+    "petal length (cm)",
+    "petal width (cm)"
+  ],
+  "n_componentes": 2,
+  "varianza_explicada_por_componente": [
+    0.7296,
+    0.2285
+  ],
+  "varianza_acumulada": 0.9581,
+  "cargas": {
+    "PC1": {
+      "sepal length (cm)": 0.5211,
+      "sepal width (cm)": -0.2693,
+      "petal length (cm)": 0.5804,
+      "petal width (cm)": 0.5649
+    },
+    "PC2": {
+      "sepal length (cm)": 0.3774,
+      "sepal width (cm)": 0.9233,
+      "petal length (cm)": 0.0245,
+      "petal width (cm)": 0.0669
+    }
+  }
+}
+===== res:data://datasets
+application/json [
+  "iris",
+  "wine"
+]
+===== res:data://datasets/wine
+application/json {
+  "nombre": "wine",
+  "filas": 178,
+  "columnas_numericas": [
+    "alcohol",
+    "malic_acid",
+    "ash",
+    "alcalinity_of_ash",
+    "magnesium",
+    "total_phenols",
+    "flavanoids",
+    "nonflavanoid_phenols",
+    "proanthocyanins",
+    "color_intensity",
+    "hue",
+    "od280/od315_of_diluted_wines",
+    "proline"
+  ],
+  "columnas_categoricas": [
+    "cultivar"
+  ]
+}
+===== prompt:interpretar_componentes:{"nombre":"iris","n_componentes":"2"}
+user | Usa la tool ejecutar_pca sobre el dataset "iris" con 2 componentes.
+Con base en el resultado, para cada componente principal:
+
+1. Identifica las 2-3 variables con mayor carga en valor absoluto.
+2. Explica qué patrón del dominio de "iris" podría representar ese componente,
+   en el lenguaje de quien conoce esos datos, no solo en términos de varianza.
+3. Indica si el signo de las cargas tiene una lectura razonable (qué variables
+   suben juntas y cuáles se mueven en sentido contrario).
+
+Termina respondiendo esta pregunta: según la varianza acumulada, ¿alcanzan
+2 componentes para describir "iris", o haría falta otro?
+No inventes variables ni valores que no estén en el resultado de la tool.
+===== tool:cargar_dataset:{"nombre":"titanic"}
+isError: True
+Error executing tool cargar_dataset: No existe el dataset 'titanic'. Disponibles: ['iris', 'wine']
+===== tool:cargar_dataset:{"nombre":"../../mcp/secreto/expedientes"}
+isError: True
+Error executing tool cargar_dataset: No existe el dataset '../../mcp/secreto/expedientes'. Disponibles: ['iris', 'wine']
+===== tool:ejecutar_pca:{"nombre":"iris","n_componentes":7}
+isError: True
+Error executing tool ejecutar_pca: n_componentes debe estar entre 1 y 4 (número de columnas numéricas en 'iris').
+===== res:data://datasets/../../mcp/secreto/expedientes
+EXCEPCION: MCPError Unknown resource: data://datasets/../../mcp/secreto/expedientes

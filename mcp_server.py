@@ -14,11 +14,12 @@ Prompt   -> una plantilla ya evaluada para una tarea recurrente: interpretar
             componentes principales en términos del dominio, no solo en
             términos de varianza.
 
-ESTADO: INCOMPLETO A PROPÓSITO.
-Cada bloque "# TODO" de abajo es una pieza que se escribe en vivo durante la
-clase, siguiendo el patrón de @mcp.tool / @mcp.resource / @mcp.prompt que ya
-viste en las diapositivas 10, 11 y 12. La lógica de negocio (pca_utils.py) ya
-está completa — aquí solo falta envolverla con el decorador correcto.
+ESTADO: COMPLETO (Tarea 5.1, Araceli Castillo).
+Los cinco bloques "# TODO" se dejaron como referencia; debajo de cada uno está
+la pieza implementada (un commit por pieza). Dos cambios surgieron de la
+verificación en el Inspector: _como_error_de_tool (los errores llegan al cliente
+con su motivo) y la lista de permitidos en pca_utils._ruta_dataset (un nombre
+con ../ ya no sale de datasets/). Ver PERMISOS.md y evidencia/.
 
 Para probar este archivo una vez completado, sin cliente ni CLI:
     mcp dev mcp_server.py
