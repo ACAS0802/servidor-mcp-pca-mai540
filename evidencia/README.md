@@ -42,4 +42,4 @@ Incluye además que el resource con plantilla rechaza una URI con `../` (eso lo 
 | Nombre con `../` | `nombre="../../mcp/secreto/expedientes"` | Se rechaza: hereda la lista de permitidos de la 5.1 | `10_segmentar_kmeans_fuera_de_datasets.png` |
 
 `log_verificacion_5.2.txt` repite estas pruebas por protocolo, más `iris` con `k=3` (silueta
-0.4599, el mismo valor que se vio en clase) y `k=11` (rechazado).
+0.4599) y `k=11` (rechazado).
