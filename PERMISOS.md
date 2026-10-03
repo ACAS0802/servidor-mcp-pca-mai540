@@ -21,11 +21,11 @@ Es **solo lectura**: ninguna pieza escribe, borra ni modifica archivos.
 - **Las filas de los datos.** Ninguna pieza devuelve los valores de un registro, solo agregados.
   `segmentar_kmeans` devuelve a qué grupo pertenece cada fila, pero no sus valores; los promedios
   son por grupo (el más pequeño de `casos_migratorios` con k = 5 tiene 265 casos).
-- **Lo que solo se sabe al cerrar un caso.** Días hasta la resolución y aplazamientos se quedan
-  en `analisis/fuente/`, fuera de `datasets/`: no forman los grupos y el servidor no los expone.
   `pca_utils.cargar_dataset`, que sí devuelve el DataFrame completo, **no está decorada**:
   el cliente no la ve.
-- **Internet.** Ni `mcp_server.py` ni `pca_utils.py` importan nada de red, y el transporte
+- **Lo que solo se sabe al cerrar un caso.** Días hasta la resolución y aplazamientos se quedan
+  en `analisis/fuente/`, fuera de `datasets/`: no forman los grupos y el servidor no los expone.
+- **Internet.** Ni `mcp_server.py`, ni `pca_utils.py`, ni `kmeans_utils.py` importan nada de red, y el transporte
   es `stdio`: el servidor no abre ningún puerto.
 - **La clave de la API.** `mcp_server.py` no lee `.env`; eso lo hace `main.py`, que es el
   cliente. Al lanzar el servidor sin `env`, el SDK solo le pasa `HOME`, `LC_CTYPE`, `PATH`,
@@ -38,7 +38,7 @@ Es **solo lectura**: ninguna pieza escribe, borra ni modifica archivos.
 Cada permiso responde a una pieza: listar nombres (resource 1), leer un CSV para describirlo
 (tool 1 y resource 2) y leer sus columnas numéricas para ajustar el PCA (tool 2) y K-Means
 (tool 3, que reutiliza la misma lista de permitidos). Ninguna de
-las cinco necesita escribir, salir de `datasets/`, usar la red ni ver filas individuales, así
+las seis necesita escribir, salir de `datasets/`, usar la red ni ver filas individuales, así
 que el servidor no lo permite.
 
 ## Límites que quedan
