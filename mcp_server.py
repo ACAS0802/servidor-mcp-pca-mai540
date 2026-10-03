@@ -144,6 +144,32 @@ def ficha_dataset(nombre: str) -> dict:
 #   Devolver:    return [UserMessage(prompt)]
 #   Ver el texto exacto sugerido en la diapositiva 12.
 
+@mcp.prompt(
+    name="interpretar_componentes",
+    description=(
+        "Interpreta los componentes principales de un dataset en términos del "
+        "dominio, no solo de la varianza: variables dominantes, patrón que "
+        "representan, lectura del signo y si el número de componentes alcanza."
+    ),
+)
+def interpretar_componentes(
+    nombre: str = Field(description="Nombre del dataset a interpretar (por ejemplo: 'iris')."),
+    n_componentes: int = Field(description="Número de componentes principales a interpretar."),
+) -> list[UserMessage]:
+    prompt = f"""Usa la tool ejecutar_pca sobre el dataset "{nombre}" con {n_componentes} componentes.
+Con base en el resultado, para cada componente principal:
+
+1. Identifica las 2-3 variables con mayor carga en valor absoluto.
+2. Explica qué patrón del dominio de "{nombre}" podría representar ese componente,
+   en el lenguaje de quien conoce esos datos, no solo en términos de varianza.
+3. Indica si el signo de las cargas tiene una lectura razonable (qué variables
+   suben juntas y cuáles se mueven en sentido contrario).
+
+Termina respondiendo esta pregunta: según la varianza acumulada, ¿alcanzan
+{n_componentes} componentes para describir "{nombre}", o haría falta otro?
+No inventes variables ni valores que no estén en el resultado de la tool."""
+    return [UserMessage(prompt)]
+
 
 if __name__ == "__main__":
     mcp.run(transport="stdio")
