@@ -70,6 +70,24 @@ def cargar_dataset(
 #   La descripción debe mencionar que devuelve varianza explicada, varianza
 #   acumulada y las cargas (loadings) de cada variable original.
 
+@mcp.tool(
+    name="ejecutar_pca",
+    description=(
+        "Ejecuta PCA (análisis de componentes principales) sobre las columnas "
+        "numéricas de un dataset, después de estandarizarlas. Devuelve la "
+        "varianza explicada por cada componente, la varianza acumulada y las "
+        "cargas (loadings) de cada variable original en cada componente, que "
+        "son lo que permite interpretar qué representa cada componente. Usa "
+        "cargar_dataset antes para saber cuántas columnas numéricas hay: "
+        "n_componentes debe estar entre 1 y ese número."
+    ),
+)
+def ejecutar_pca(
+    nombre: str = Field(description="Nombre del dataset, sin la extensión .csv (por ejemplo: 'iris')."),
+    n_componentes: int = Field(description="Número de componentes principales a calcular (mínimo 1)."),
+) -> dict:
+    return pca_utils.ejecutar_pca(nombre, n_componentes)
+
 
 # ---------------------------------------------------------------------------
 # Resources — datos que el CLIENTE pide directamente, sin que Claude decida
