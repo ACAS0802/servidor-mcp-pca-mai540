@@ -61,7 +61,6 @@ def ejecutar_kmeans(nombre: str, k: int) -> dict:
         "k": k,
         "filas_usadas": len(filas),
         "variables": numericas,
-        "etiquetas": [int(e) for e in etiquetas],
         "tamano_por_grupo": {f"grupo_{g}": int(n) for g, n in enumerate(tamanos)},
         "inercia": round(float(modelo.inertia_), 2),
         "silueta": round(float(silhouette_score(X, etiquetas)), 4),
@@ -69,4 +68,7 @@ def ejecutar_kmeans(nombre: str, k: int) -> dict:
             f"grupo_{g}": {col: round(float(v), 3) for col, v in perfil.loc[g].items()}
             for g in perfil.index
         },
+        # Al final: es una lista larga (una etiqueta por fila) y así el resumen
+        # se lee primero en el Inspector.
+        "etiquetas": [int(e) for e in etiquetas],
     }

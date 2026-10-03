@@ -1,5 +1,5 @@
 """
-Servidor MCP: dos tools, dos resources, un prompt.
+Servidor MCP: tres tools, dos resources, un prompt (la tercera tool, segmentar_kmeans, es de la Tarea 5.2).
 
 Este es el archivo que el profesor completa en vivo durante la Clase 5.1,
 siguiendo el mismo patrón del curso de Anthropic "Introduction to Model
@@ -31,6 +31,7 @@ from mcp.server.mcpserver import MCPServer, UserMessage
 from mcp.server.mcpserver.exceptions import ToolError
 from pydantic import Field
 
+import kmeans_utils
 import pca_utils
 
 mcp = MCPServer("analisis-datos")
@@ -103,6 +104,29 @@ def ejecutar_pca(
     n_componentes: int = Field(description="Número de componentes principales a calcular (mínimo 1)."),
 ) -> dict:
     return _como_error_de_tool(pca_utils.ejecutar_pca, nombre, n_componentes)
+
+
+# Tarea 5.2 — tool "segmentar_kmeans"
+#   Mismo patrón que ejecutar_pca: la lógica vive en kmeans_utils.py y aquí
+#   solo se envuelve con el decorador.
+
+@mcp.tool(
+    name="segmentar_kmeans",
+    description=(
+        "Segmenta un dataset con K-Means sobre sus columnas numéricas "
+        "estandarizadas. Devuelve la etiqueta de grupo de cada fila, el tamaño "
+        "de cada grupo, la inercia, el coeficiente de silueta del k elegido y el "
+        "promedio de cada variable por grupo (en sus unidades originales), que "
+        "sirve para describir qué caracteriza a cada grupo. k debe estar entre 2 "
+        "y 10. Usa las mismas filas que ejecutar_pca, así que las etiquetas se "
+        "pueden combinar con su proyección."
+    ),
+)
+def segmentar_kmeans(
+    nombre: str = Field(description="Nombre del dataset, sin la extensión .csv (por ejemplo: 'casos_migratorios')."),
+    k: int = Field(description="Número de grupos (entre 2 y 10)."),
+) -> dict:
+    return _como_error_de_tool(kmeans_utils.ejecutar_kmeans, nombre, k)
 
 
 # ---------------------------------------------------------------------------
