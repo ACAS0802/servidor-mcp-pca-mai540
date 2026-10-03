@@ -1,0 +1,24 @@
+{
+  "dataset": "casos_migratorios",
+  "filas_usadas": 2854,
+  "k_elegido": 5,
+  "candidatos_codo": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "silueta": 0.2333,
+  "pca_varianza_por_componente": [
+    0.2009,
+    0.1621
+  ],
+  "pca_varianza_acumulada_2d": 0.3631,
+  "tamano_por_grupo": {
+    "grupo_0": 753,
+    "grupo_1": 587,
+    "grupo_2": 944,
+    "grupo_3": 305,
+    "grupo_4": 265
+  }
+}
