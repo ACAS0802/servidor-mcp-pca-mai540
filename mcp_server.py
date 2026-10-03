@@ -27,11 +27,26 @@ a mano antes de conectarlo a nada más.
 """
 
 from mcp.server.mcpserver import MCPServer, UserMessage
+from mcp.server.mcpserver.exceptions import ToolError
 from pydantic import Field
 
 import pca_utils
 
 mcp = MCPServer("analisis-datos")
+
+
+def _como_error_de_tool(funcion, *args):
+    """Convierte los ValueError de pca_utils en ToolError.
+
+    Sin esto, el SDK trata un ValueError como un fallo inesperado y el cliente
+    solo ve "Error executing tool ...", sin el motivo. Con ToolError, Claude
+    recibe el mensaje (por ejemplo, la lista de datasets disponibles o el rango
+    válido de n_componentes) y puede corregir su siguiente llamada.
+    """
+    try:
+        return funcion(*args)
+    except ValueError as e:
+        raise ToolError(str(e)) from e
 
 
 # ---------------------------------------------------------------------------
@@ -59,7 +74,7 @@ mcp = MCPServer("analisis-datos")
 def cargar_dataset(
     nombre: str = Field(description="Nombre del dataset, sin la extensión .csv (por ejemplo: 'iris')."),
 ) -> dict:
-    return pca_utils.describir_dataset(nombre)
+    return _como_error_de_tool(pca_utils.describir_dataset, nombre)
 
 
 # TODO 2 — tool "ejecutar_pca"
@@ -86,7 +101,7 @@ def ejecutar_pca(
     nombre: str = Field(description="Nombre del dataset, sin la extensión .csv (por ejemplo: 'iris')."),
     n_componentes: int = Field(description="Número de componentes principales a calcular (mínimo 1)."),
 ) -> dict:
-    return pca_utils.ejecutar_pca(nombre, n_componentes)
+    return _como_error_de_tool(pca_utils.ejecutar_pca, nombre, n_componentes)
 
 
 # ---------------------------------------------------------------------------
