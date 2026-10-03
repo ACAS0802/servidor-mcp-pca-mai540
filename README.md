@@ -1,4 +1,4 @@
-# Servidor MCP para PCA — Tarea 5.1 (MAI 540)
+# Servidor MCP para PCA y K-Means — Tareas 5.1 y 5.2 (MAI 540)
 
 **Araceli Castillo** · MAI 540: Machine Learning · Prof. Kevin A. García Gallardo · Atlantis University · Octubre de 2026
 
@@ -22,8 +22,37 @@ verificados uno por uno en el MCP Inspector.
 2. Un error en una tool llegaba al cliente como *Error executing tool* sin motivo. Ahora
    llega el mensaje (datasets disponibles o rango válido de `n_componentes`).
 
+## Tarea 5.1
+
 **Historial:** `git log --oneline` — proyecto base → TODO 1 → TODO 2 → TODO 3 → TODO 4 →
 TODO 5 → corrección de rutas → corrección de errores → evidencia → permisos e informe.
+
+## Tarea 5.2 — Segmentación con K-Means y propuesta de capstone
+
+Se agregó la tool `segmentar_kmeans` con el mismo patrón: la lógica en `kmeans_utils.py`, el
+decorador en `mcp_server.py`. Se segmenta `datasets/casos_migratorios.csv`: 2,854 casos
+**sintéticos** de la Tarea 4.2, con 8 variables que se conocen al ingresar el caso.
+
+| Dónde | Qué |
+|---|---|
+| `kmeans_utils.py` | `cargar_y_escalar` y `ejecutar_kmeans` (etiquetas, inercia, silueta, tamaño y promedios por grupo) |
+| `mcp_server.py` | Tool `segmentar_kmeans(nombre, k)` |
+| `analisis/segmentacion.py` | Elección de k, proyección PCA y perfil de grupos, con las mismas funciones que las tools |
+| `analisis/figuras/` | `eleccion_k.png` (codo, silueta, reproducibilidad) y `pca_2d_grupos.png` |
+| `analisis/resultados/` | Tabla de k, perfil de cada grupo y resumen |
+| `evidencia/8_…` a `10_…`, `log_verificacion_5.2.txt` | Verificación de la tool en el Inspector |
+| `MAI540_Tarea5.2_Segmentacion_Araceli_Castillo.pdf` | Elección de k, PCA e interpretación de cada grupo con su acción |
+| `MAI540_Tarea5.2_Propuesta_Capstone_Araceli_Castillo.pdf` | Propuesta de capstone (una página) |
+
+**k = 5.** Es el último k que reduce la inercia en al menos 10 % (10.7 %; k = 6: 8.0 %) y es un
+máximo local de la silueta (0.233). La silueta es baja en todos los k: los grupos se traslapan.
+**PCA en 2D:** conserva 36.3 % de la varianza (20.1 % + 16.2 %).
+**Hallazgo:** con 10 reinicios, K-Means no siempre llegaba a la misma partición; con 50 sí
+(ARI 0.998).
+
+**Reproducir:** `python3 analisis/preparar_datos.py` y luego `python3 analisis/segmentacion.py`.
+
+---
 
 ---
 
