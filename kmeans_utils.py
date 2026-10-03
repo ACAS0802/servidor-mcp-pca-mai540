@@ -19,7 +19,7 @@ from sklearn.preprocessing import StandardScaler
 import pca_utils
 
 SEMILLA = 42
-N_INIT = 10
+N_INIT = 50  # con 10 reinicios, k=3, 5 y 6 caían a veces en un óptimo local peor (ver bitácora)
 
 
 def cargar_y_escalar(nombre: str) -> tuple[pd.DataFrame, np.ndarray, list[str]]:
