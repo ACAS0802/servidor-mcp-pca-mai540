@@ -11,7 +11,7 @@ verificados uno por uno en el MCP Inspector.
 | `mcp_server.py` | Las 5 piezas (un commit por pieza) |
 | `evidencia/` | Captura de cada pieza en el Inspector, antes/después de las correcciones y log por protocolo |
 | `PERMISOS.md` | Qué puede hacer el servidor, qué no expone y por qué es el mínimo |
-| `MAI540_Tarea5.1_Informe_Araceli_Castillo.pdf` | Informe APA de 1 página |
+| `MAI540_Tarea5.1_Informe_Araceli_Castillo.pdf` | Informe APA (2 páginas de cuerpo) |
 | `MAI540_Tarea5.1_Evidencia_Inspector_Araceli_Castillo.pdf` | Las capturas de `evidencia/` en un solo PDF |
 
 **Probar:** `pip install -r requirements.txt` y luego `mcp dev mcp_server.py`.
