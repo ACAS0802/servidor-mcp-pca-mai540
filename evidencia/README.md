@@ -32,3 +32,14 @@ fuera del repositorio. No contiene datos reales.
 `log_verificacion.txt` repite las mismas pruebas con un cliente MCP propio
 (`probar_cliente.py`, stdio), sin navegador: sirve para comprobar el resultado como texto.
 Incluye además que el resource con plantilla rechaza una URI con `../` (eso lo hace el SDK).
+
+## Tarea 5.2: tool `segmentar_kmeans`
+
+| Prueba | Petición | Resultado | Imagen |
+|---|---|---|---|
+| Tool `segmentar_kmeans` | `nombre="casos_migratorios"`, `k=5` | 2,854 filas; grupos de 753, 587, 944, 305 y 265; inercia 12,853.08; **silueta 0.2333**; promedios por grupo; etiquetas al final | `8_tool_segmentar_kmeans.png` |
+| k fuera de rango | `k=1` | Se rechaza: *k debe estar entre 2 y 10* | `9_segmentar_kmeans_k_invalido.png` |
+| Nombre con `../` | `nombre="../../mcp/secreto/expedientes"` | Se rechaza: hereda la lista de permitidos de la 5.1 | `10_segmentar_kmeans_fuera_de_datasets.png` |
+
+`log_verificacion_5.2.txt` repite estas pruebas por protocolo, más `iris` con `k=3` (silueta
+0.4599, el mismo valor que se vio en clase) y `k=11` (rechazado).

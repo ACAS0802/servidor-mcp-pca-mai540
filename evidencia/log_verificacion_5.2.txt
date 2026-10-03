@@ -1,0 +1,112 @@
+# Log de verificacion por protocolo MCP — Tarea 5.2 (segmentar_kmeans)
+# 2026-10-03T18:27Z · mcp 2.3.0
+
+===== list
+tools: ['cargar_dataset', 'ejecutar_pca', 'segmentar_kmeans']
+resources: ['data://datasets']
+templates: ['data://datasets/{nombre}']
+prompts: ['interpretar_componentes']
+===== tool:segmentar_kmeans:{"nombre":"casos_migratorios","k":5}
+isError: False
+{
+  "dataset": "casos_migratorios",
+  "k": 5,
+  "filas_usadas": 2854,
+  "variables": [
+    "edad",
+    "meses_en_eeuu",
+    "num_dependientes",
+    "detenido",
+    "representacion_legal",
+    "requiere_interprete",
+    "antecedentes_penales",
+    "solicito_fianza"
+  ],
+  "tamano_por_grupo": {
+    "grupo_0": 753,
+    "grupo_1": 587,
+    "grupo_2": 944,
+    "grupo_3": 305,
+    "grupo_4": 265
+  },
+  "inercia": 12853.08,
+  "silueta": 0.2333,
+  "promedios_por_grupo": {
+    "grupo_0": {
+      "edad": 23.34,
+      "meses_en_eeuu": 63.45,
+      "num_dependientes": 0.097,
+      "detenido": 0.0,
+      "representacion_legal": 0.592,
+      "requiere_interprete": 0.279,
+      "antecedentes_penales": 0.0,
+      "solicito_fianza": 0.0
+    },
+    "grupo_1": {
+      "edad": 22.511,
+      "meses_en_eeuu": 65.437,
+      "num_dependientes": 0.09,
+      "detenido": 1.0,
+      "representacion_legal": 0.269,
+ 
+===== tool:segmentar_kmeans:{"nombre":"iris","k":3}
+isError: False
+{
+  "dataset": "iris",
+  "k": 3,
+  "filas_usadas": 150,
+  "variables": [
+    "sepal length (cm)",
+    "sepal width (cm)",
+    "petal length (cm)",
+    "petal width (cm)"
+  ],
+  "tamano_por_grupo": {
+    "grupo_0": 53,
+    "grupo_1": 50,
+    "grupo_2": 47
+  },
+  "inercia": 139.82,
+  "silueta": 0.4599,
+  "promedios_por_grupo": {
+    "grupo_0": {
+      "sepal length (cm)": 5.802,
+      "sepal width (cm)": 2.674,
+      "petal length (cm)": 4.37,
+      "petal width (cm)": 1.413
+    },
+    "grupo_1": {
+      "sepal length (cm)": 5.006,
+      "sepal width (cm)": 3.428,
+      "petal length (cm)": 1.462,
+      "petal width (cm)": 0.246
+    },
+    "grupo_2": {
+      "sepal length (cm)": 6.781,
+      "sepal width (cm)": 3.096,
+      "petal length (cm)": 5.511,
+      "petal width (cm)": 1.972
+    }
+  },
+  "etiquetas": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+   
+===== tool:segmentar_kmeans:{"nombre":"casos_migratorios","k":1}
+isError: True
+Error executing tool segmentar_kmeans: k debe estar entre 2 y 10: la silueta necesita al menos 2 grupos.
+===== tool:segmentar_kmeans:{"nombre":"casos_migratorios","k":11}
+isError: True
+Error executing tool segmentar_kmeans: k debe estar entre 2 y 10: la silueta necesita al menos 2 grupos.
+===== tool:segmentar_kmeans:{"nombre":"../../mcp/secreto/expedientes","k":2}
+isError: True
+Error executing tool segmentar_kmeans: No existe el dataset '../../mcp/secreto/expedientes'. Disponibles: ['casos_migratorios', 'iris', 'wine']
