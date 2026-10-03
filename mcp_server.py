@@ -115,6 +115,14 @@ def listar_datasets() -> list[str]:
 #   El framework extrae automáticamente lo que haya entre {llaves} en la URI
 #   que pida el cliente y lo pasa como argumento "nombre".
 
+@mcp.resource(
+    "data://datasets/{nombre}",
+    mime_type="application/json",
+    description="Ficha de un dataset: filas, columnas numéricas y columnas categóricas.",
+)
+def ficha_dataset(nombre: str) -> dict:
+    return pca_utils.describir_dataset(nombre)
+
 
 # ---------------------------------------------------------------------------
 # Prompt — una plantilla YA EVALUADA para una tarea que se repite, en vez de
