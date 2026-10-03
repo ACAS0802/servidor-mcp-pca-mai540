@@ -44,6 +44,8 @@ decorador en `mcp_server.py`. Se segmenta `datasets/casos_migratorios.csv`: 2,85
 | `MAI540_Tarea5.2_Segmentacion_Araceli_Castillo.pdf` | Elección de k, PCA e interpretación de cada grupo con su acción |
 | `MAI540_Tarea5.2_Propuesta_Capstone_Araceli_Castillo.pdf` | Propuesta de capstone (una página) |
 | `MAI540_Tarea5.2_Evidencia_Inspector_Araceli_Castillo.pdf` | Las capturas 8 a 10 en un solo PDF |
+| `MAI540_Tarea5.2_Informe_APA_Araceli_Castillo.pdf` | El mismo análisis como informe APA 7 (3 páginas de cuerpo) |
+| `BITACORA_Tarea5.2_Araceli_Castillo.pdf` | Bitácora de desarrollo asistido |
 
 **k = 5.** Es el último k que reduce la inercia en al menos 10 % (10.7 %; k = 6: 8.0 %) y es un
 máximo local de la silueta (0.233). La silueta es baja en todos los k: los grupos se traslapan.
